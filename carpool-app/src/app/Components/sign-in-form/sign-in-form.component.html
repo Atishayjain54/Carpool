@@ -1,0 +1,45 @@
+<!-- <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+        <input type="text" class="form-control" id="emailId" formControlName="emailId" placeholder="Enter Email Id">
+        <div *ngIf="myForm.controls['emailId'].invalid && (myForm.controls['emailId'].dirty || myForm.controls['emailId'].touched)"
+            class="alert alert-danger">
+            Email ID is required.
+        </div>
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control" id="passward" formControlName="passward" placeholder="Enter Passward">
+        <div *ngIf="myForm.controls['passward'].invalid && (myForm.controls['passward'].dirty || myForm.controls['passward'].touched)"
+            class="alert alert-danger">
+            Passward is required.
+        </div>
+    </div>
+    <button type="submit" class="submit-btn">Submit</button>
+</form> -->
+
+<div class="container">
+    <div class="boldText">Log In</div>
+    <hr />
+    <form [formGroup]="signInForm" >
+        <div>
+            <input type="text" formControlName="email" placeholder="Enter Email Id" />
+        </div>
+        <!-- <small class="text-danger"
+            *ngIf="signInForm.get('email')?.errors?.['required'] && (signInForm.get('email')?.touched)">Required</small>
+        <small class="text-danger"
+            *ngIf="signInForm.get('email')?.errors?.['email']  && (signInForm.get('email')?.touched)">Enter valid
+            Email</small> -->
+        <div>
+            <input type="password" formControlName="password" placeholder="Enter Passward" />
+
+        </div>
+        <div>
+            <button type="submit" value="Submit" (click)="onSubmit()">
+                Submit
+            </button>
+        </div>
+    </form>
+    <span>Not a member yet ? </span><a id="signup" (click)="signupClicked()"> SIGN UP</a>
+    <!-- <div class="footer">
+        <img class="footerImage" src="../assets/Images/formbg.png" alt="footerImage" />
+    </div> -->
+</div>

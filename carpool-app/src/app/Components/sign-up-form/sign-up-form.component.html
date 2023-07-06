@@ -1,0 +1,51 @@
+<!-- <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="emailId" class="form-label">Email Id*</label>
+      <input type="text" class="form-control" id="EmailId" formControlName="EmailId">
+      <div
+        *ngIf="myForm.controls['EmailId'].invalid && (myForm.controls['EmailId'].dirty || myForm.controls['EmailId'].touched)"
+        class="alert alert-danger">
+        Email is required.
+      </div>
+    </div>
+    <div>
+        <label for="passward" class="form-label">Passward*</label>
+        <input type="text" class="form-control" id="passward" formControlName="passward">\
+        <div
+        *ngIf="myForm.controls['passward'].invalid && (myForm.controls['passward'].dirty || myForm.controls['passward'].touched)"
+        class="alert alert-danger">
+        passward is required.
+    </div>
+</div> -->
+
+<div class="container">
+  <div class="boldText">Sign Up</div>
+  <hr />
+  <form [formGroup]="signupForm" >
+    <div>
+      <input type="text" formControlName="email" placeholder="Enter Email Id" />
+    </div>
+    <!-- <small class="text-danger"
+      *ngIf="signupForm.get('email')?.errors?.['required'] && (signupForm.get('email')?.touched)">Required</small>
+    <small class="text-danger"
+      *ngIf="signupForm.get('email')?.errors?.['email'] && (signupForm.get('email')?.touched)">Enter valid Email</small> -->
+    <div>
+      <input type="password" formControlName="password" placeholder="Enter Passward" />
+
+    </div>
+    <!-- <small class="text-danger"
+      *ngIf="signupForm.get('password')?.errors?.['required'] && (signupForm.get('password')?.touched)">Required</small>
+    <small class="text-danger"
+      *ngIf="(signupForm.get('password')?.errors?.['minlength'] || signupForm.get('password')?.errors?.['maxlength']) && (signupForm.get('password')?.touched)">Password
+      must be 8 to 25 characters</small> -->
+    <div>
+      <input type="password" formControlName="confirmPassword" placeholder="Confirm Passward" />
+    </div>
+    <div>
+      <button type="submit" value="Submit" (click)="onSubmit()">
+        Submit
+      </button>
+    </div>
+  </form>
+  <span>Already a member? </span><a id="login" (click)="toggleState()"> Log In</a>
+</div>

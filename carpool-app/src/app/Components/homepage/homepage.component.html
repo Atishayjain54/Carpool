@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row header">
+        <div class="col-sm-6 logo">
+            <img src="../../assets/Images/logo.png" (click)="redirect()" alt="" />
+        </div>
+        <div class="col-sm-6 profile">
+            <div class="profileToggle" (click)="toggle = !toggle">
+                <span id="profileName"><b>
+                    </b>
+                </span><span><img id="profileImage" src="assets/Images/user-profile.jpg" alt="" /></span>
+            </div>
+        </div>
+        <div class="dropdown" *ngIf="toggle">
+            <li routerLink="/home/my-profile" (click)="profileClick()">Profile</li>
+            <li routerLink="/home/my-rides">My Rides</li>
+            <li routerLink="login" (click)="login()">Logout</li>
+        </div>
+
+        <div class="homeFooter">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
