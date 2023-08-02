@@ -1,7 +1,7 @@
-<form class="row container">
-    <div class="col-sm-4 box">
+<form [formGroup]="OfferRide" class="row container">
+    <div [formGroup]="rideDetails" class="col-sm-4 box">
         <span class="title"> Offer a Ride</span>
-        <span><label class="switch" (click)="redirect()">
+        <span (click)="redirect()"><label class="switch">
                 <input type="checkbox" checked />
                 <span class="slider round"></span>
             </label>
@@ -11,29 +11,40 @@
             <div class="col-sm-11 rightcard">
                 <div class="inputField"><label for="from">From</label></div>
                 <input type="text" formControlName="from" />
-                <!-- <small class="text-danger"
-                    *ngIf="rideDetails.get('from')?.errors?.['pattern'] && (rideDetails.get('from')?.touched)">Invalid
+                <small class="text-danger"
+                    *ngIf="rideDetails?.get('from')?.errors?.['pattern'] && (rideDetails?.get('from')?.touched)">Invalid
                     name</small>
                 <small class="text-danger"
-                    *ngIf="rideDetails.get('from')?.errors?.['required'] && (rideDetails.get('from')?.touched)">Required</small> -->
+                    *ngIf="rideDetails?.get('from')?.errors?.['required'] && (rideDetails?.get('from')?.touched)">Required</small>
                 <div class="inputField"><label for="to">To</label></div>
                 <input type="text" formControlName="to" />
-                <!-- <small class="text-danger"
-                    *ngIf="rideDetails.get('to')?.errors?.['pattern'] && (rideDetails.get('to')?.touched)">Invalid
+                <small class="text-danger"
+                    *ngIf="rideDetails?.get('to')?.errors?.['pattern'] && (rideDetails?.get('to')?.touched)">Invalid
                     name</small>
                 <small class="text-danger"
-                    *ngIf="rideDetails.get('to')?.errors?.['required'] && (rideDetails.get('to')?.touched)">Required</small> -->
+                    *ngIf="rideDetails?.get('to')?.errors?.['required'] && (rideDetails?.get('to')?.touched)">Required</small>
                 <div class="inputField"><label for="date">Date</label></div>
-                <input type="date" formControlName="date" />
-                <!-- <small class="text-danger"
-                    *ngIf="rideDetails.get('date')?.errors?.['required'] && (rideDetails.get('date')?.touched )">Required</small> -->
-                <div class="inputField"><label for="time">Time</label></div>
-                <input type="time" formControlName="time" />
-                <!-- <small class="text-danger"
-                    *ngIf="rideDetails.get('time')?.errors?.['required'] && (rideDetails.get('time')?.touched )">Required</small>
+                <input type="date" formControlName="date" [min]="min" />
                 <small class="text-danger"
-                    *ngIf="rideDetails.errors?.['InvalidTime'] && (rideDetails.get('time')?.touched)"><br />Please
-                    select a valid Time</small> -->
+                    *ngIf="rideDetails?.get('date')?.errors?.['required'] && (rideDetails?.get('date')?.touched )">Required</small>
+                <div class="inputField"><label for="time">Time</label>
+                </div>
+                <div class="time">
+                    <input type="radio" id="time1" name="time" value="5am-9am" formControlName="time" checked />
+                    <label for="time1">5am-9am</label>
+
+                    <input type="radio" id="time2" name="time" value="9am-12pm" formControlName="time" />
+                    <label for="time2">9am-12pm</label>
+
+                    <input type="radio" id="time3" name="time" value="12pm-3pm" formControlName="time" />
+                    <label for="time3">12pm-3pm</label>
+
+                    <input type="radio" id="time4" name="time" value="3pm-6pm" formControlName="time" />
+                    <label for="time4">3pm-6pm</label>
+
+                    <input type="radio" id="time5" name="time" value="6pm-9pm" formControlName="time" />
+                    <label for="time5">6pm-9pm</label>
+                </div>
             </div>
             <div id="sideBar" class="col-sm-1 leftcard">
                 <li class="startingPoint"></li>
@@ -44,55 +55,34 @@
                 </li>
             </div>
         </div>
-        <div>
-            <button id="nextbutton" (click)="nextbutton()" [disabled]="!rideDetails?.valid">Next >></button>
+        <div (click)="addCard()">
+            <button id="nextbutton" [disabled]="!rideDetails.valid">Next >></button>
         </div>
     </div>
-    <div class="col-sm-4 box" *ngIf="stopComponent">
+    <div *ngIf="next" [formGroup]="stopDetails" class="col-sm-4 box">
         <span class="title"> Offer a Ride</span>
         <span (click)="redirect()"><label class="switch">
-                <input type="checkbox" checked/>
+                <input type="checkbox" />
                 <span class="slider round"></span>
             </label>
         </span>
         <div class="caption">we get you the matches asap !</div>
         <div class="row">
             <div class="col-sm-11 rightcard">
-                <form>
-                    <div class="inputField">
-                        <label for="stopName">Stop1</label>
-                    </div>
-                    <input type="text" formControlName="stopName" />
-                    <div class="inputField">
-                        <label for="stopName">Stop2</label>
-                    </div>
-                    <input type="text" formControlName="stopName" />
-                    <div class="inputField">
-                        <label for="stopName">Stop3</label>
-                    </div>
-                    <input type="text" formControlName="stopName" />
-                    <!-- <small class="text-danger"
-                        *ngIf="pickupStop.get('stopName')?.errors?.['required'] && (pickupStop.get('stopName')?.touched)">Required</small>
-                    <small class="text-danger"
-                        *ngIf="pickupStop.get('stopName')?.errors?.['WhiteSpace'] && (pickupStop.get('stopName')?.touched)">Feild
-                        can't be empty</small> -->
-                    <!-- <small class="text-danger"
-                        *ngIf="pickupStop.get('stopName')?.errors?.['InvalidStopName'] && (pickupStop.get('stopName')?.touched)"><br />Previous
-                        stop Name and Present stop name are similar</small> -->
-                    <!-- <div class="inputField"><label for="pickupDate">Date</label></div>
-                    <input type="date" formControlName="pickupDate" /> -->
-                    <!-- <small class="text-danger"
-                        *ngIf="pickupStop.get('pickupDate')?.errors?.['required'] && (pickupStop.get('pickupDate')?.touched )">Required</small> -->
-                    <!-- <div class="inputField"><label for="time">Time</label></div>
-                    <input type="time" formControlName="pickupTime" /> -->
-                    <!-- <small class="text-danger"
-                        *ngIf="pickupStop.get('pickupTime')?.errors?.['required'] && (pickupStop.get('pickupTime')?.touched )">Required</small>
-                    <small class="text-danger"
-                        *ngIf="pickupStop.errors?.['InvalidpickupTime'] && (pickupStop.get('pickupTime')?.touched)"><br />Please
-                        select a valid Time</small> -->
-                    <!-- <div class="inputField"><label for="time" formControlName="pickupTime">Time</label></div>
-                    <input type="time" placeholder="hh:mm"> -->
-                </form>
+                <div class="inputField">
+                    <label for="stopName1">Stop1{{ stopNumber }}</label>
+                </div>
+                <input type="text" formControlName="stopName1" />
+
+                <div class="inputField">
+                    <label for="stopName2">Stop2{{ stopNumber }}</label>
+                </div>
+                <input type="text" formControlName="stopName2" />
+
+                <div class="inputField">
+                    <label for="stopName3">Stop3{{ stopNumber }}</label>
+                </div>
+                <input type="text" formControlName="stopName3" />
                 <div class="row pricebar">
                     <div class="col-sm-7">
                         <div class="inputField">
@@ -108,28 +98,38 @@
                         </div>
                     </div>
                     <div class="col-sm-5">
-                        <div class="inputField"><label for="price">Price</label></div>
+                        <div class="inputField">
+                          <label for="price">Price</label>
+                        </div>
                         <input type="text" formControlName="price" id="price" placeholder="&#8377;0" />
-                    </div>
+                        <small class="text-danger"
+                          *ngIf="rideDetails?.get('price')?.errors?.['required'] && rideDetails?.get('price')?.touched">
+                          Required
+                        </small>
+                        <small class="text-danger"
+                          *ngIf="rideDetails?.get('price')?.errors?.['positiveNumber'] && rideDetails?.get('price')?.touched">
+                          Price must be a positive number
+                        </small>
+                      </div>
+                      
                 </div>
             </div>
             <div class="col-sm-1 leftcard">
                 <li class="startingPoint"></li>
                 <li></li>
                 <li></li>
-                <li></li>
                 <li class="destinationPoint">
                     <i class="fas fa-map-marker-alt i"></i>
                 </li>
-                <li id="add">
-                    <button id="add">
+                <!-- <li id="add">
+                    <button id="add" [disabled]="!pickupStop.valid">
                         <i class="fas fa-plus i"></i>
                     </button>
-                </li>
+                </li> -->
             </div>
         </div>
         <div id="submit">
-            <button type="submit">
+            <button type="submit" (click)="submit()" [disabled]="!OfferRide.valid">
                 Submit
             </button>
         </div>

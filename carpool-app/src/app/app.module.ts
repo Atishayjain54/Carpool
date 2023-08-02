@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DashBoardComponent } from './Components/dash-board/dash-board.component';
 import { MyRidesComponent } from './Components/my-rides/my-rides.component';
 import { MyProfileComponent } from './Components/my-profile/my-profile.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MyProfileComponent } from './Components/my-profile/my-profile.component
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserModule, HttpClientModule,
     FormsModule ,
     ReactiveFormsModule
   ],

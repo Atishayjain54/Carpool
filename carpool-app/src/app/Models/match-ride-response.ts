@@ -1,11 +1,16 @@
 export class MatchRideResponse {
-    public id!: string;
-    public rideId!: number;
-    public availableSeats!: number;
-    public boardingStopId!: number;
-    public destinationStopId!: number;
-    public dateTime!: Date;
-    public rideProviderName!: string;
-    public price!: number;
-    public image!: string;
-}
+    constructor(
+      public ownerId: string,
+      public customerId: string,
+      public firstName: string,
+      public lastName: string,
+      public availableSeats: number,
+      public source: string,
+      public destination: string,
+      public date: string,
+      public validFrom: string,
+      public validTill: string,
+      public price: number
+    ) {}
+  }
+  

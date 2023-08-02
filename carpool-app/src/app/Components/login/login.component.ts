@@ -8,14 +8,13 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   isSignUp: boolean = true;
-  isSignInForm: boolean = false;
   @Input() isSignInClick: any;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    // this.isSignUpForm= true;
   }
+  
   toggleState() {
     this.isSignUp = !this.isSignUp;
   }

@@ -1,11 +1,8 @@
 export class UserDetailsRequest {
-    id!: string
-
+    UserId!: string
+    passwordHash !:String
     firstName!: string
-
     lastName!: string
-
     phoneNumber!: number
-
-    imageUrl!: string
+    email !: string
 }

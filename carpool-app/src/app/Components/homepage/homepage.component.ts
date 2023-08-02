@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { LoginResponse } from 'src/app/Models/login-response';
+import { UserDetails } from 'src/app/Models/user-details';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { BookRideService } from 'src/app/Services/book-ride.service';
+import { LoginService } from 'src/app/Services/login.service';
+import { OfferRideService } from 'src/app/Services/offer-ride.service';
 
 @Component({
   selector: 'app-homepage',
@@ -7,21 +13,29 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent {
-  constructor(private router:Router){}
+  constructor(private router:Router,private loginService:LoginService,private authenticationService:AuthenticationService,bookRideService:BookRideService,offerRideService:OfferRideService){}
   toggle : Boolean = false;
+  loginDetails?: LoginResponse;
+  
   ngOnInit(){
-
+    this.loginDetails = this.loginService.getUserDetails();
   }
+
   myProfile() {
     this.toggle = false;
+  }
+  myRides(){
+    this.toggle = false;
+    this.router.navigate(['home/my-rides']);
   }
   redirect(){
     this.router.navigate(['home']);
   }
   login(){
-    this.router.navigate(['login'])
+    this.authenticationService.logout();
+    this.router.navigate(['login/signIn']);
   }
   profileClick(){
-    this.router.navigate(['my-profile'])
+    this.router.navigate(['home/my-profile']);
   }
 }

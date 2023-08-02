@@ -1,25 +1,27 @@
-import { StopsDTO } from "./stops-dto"
+import { IntermediaryStop } from "./intermediary-stop";
 
 export class OfferRideRequest {
-    rideOwnerId: string
+    ownerId!: string
+    source!:string
+    destination!: string
+    date!: string
+    rideValidFrom!:string;
+    rideValidTill!:string;
+    availableSeats?: number
+    intermediaryStops?: IntermediaryStop[];
+    price!: Float32Array;
+    isRideBooked?:boolean;
+    customerId?:string;
 
-    startingStop: string
-
-    endingStop: string
-
-    date: Date
-
-    fair: number
-
-    totalSeats: number
-    stops: StopsDTO[]
-    constructor(RideOwnerId: string, StartingStop: string, EndingStop: string, Date: Date, Fair: number, TotalSeats: number, Stops: StopsDTO[]) {
-        this.rideOwnerId = RideOwnerId;
-        this.startingStop = StartingStop;
-        this.endingStop = EndingStop;
-        this.date = Date;
-        this.fair = Fair;
-        this.totalSeats = TotalSeats;
-        this.stops = Stops;
-    }
+    // constructor(ownerId: string, source: string, destination: string, rideDate: string, rideValidFrom: string,rideValidTill: string, availableSeats: number, intermediaryStops: IntermediaryStop[],price:Float32Array) {
+    //     this.ownerId = ownerId;
+    //     this.source = source;
+    //     this.destination = destination;
+    //     this.rideValidFrom=rideValidFrom;
+    //     this.rideValidTill=rideValidTill;
+    //     this.rideDate = rideDate;
+    //     this.availableSeats = availableSeats;
+    //     this.intermediaryStops =  intermediaryStops;
+    //     this.price=price;
+    // }
 }

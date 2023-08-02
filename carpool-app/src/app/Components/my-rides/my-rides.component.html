@@ -1,98 +1,97 @@
 <div class="row">
-    <div class="col-sm-6 rides">
-      <div class="bookedrides">Booked rides</div>
-      <div class="scrollable">
-        <div class="box card">
-          <div class="name">
-           0
-            <span>
-              <img class="userImage" src="assets/Images/user-profile.jpg" alt="profile" />
-            </span>
+  <div class="col-sm-6 rides">
+    <div class="bookedrides">Booked rides</div>
+    <div class="scrollable">
+      <div *ngFor="let i of bookedRides" class="box card">
+        <div class="name">
+          {{ i.firstName | titlecase }}
+          <!-- <span>
+            <img class="userImage" src="{{ i.image }}" alt="profile" />
+          </span> -->
+        </div>
+        <div class="row">
+          <div class="col-sm-7 subTitle">From</div>
+          <div class="col-sm-5 subTitle">To</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 data">{{ i.source | titlecase }}</div>
+          <div class="col-sm-3 cardPins">
+            <li class="cardPin startingPoint"></li>
+            <li class="cardPin"></li>
+            <li class="cardPin"></li>
+            <li class="cardPin"></li>
+            <li class="cardPin destinationPoint">
+              <i class="fas fa-map-marker-alt i"></i>
+            </li>
           </div>
-          <div class="row">
-            <div class="col-sm-7 subTitle">From</div>
-            <div class="col-sm-5 subTitle">To</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-4 data">1p5</div>
-            <div class="col-sm-3 cardPins">
-              <li class="cardPin startingPoint"></li>
-              <li class="cardPin"></li>
-              <li class="cardPin"></li>
-              <li class="cardPin"></li>
-              <li class="cardPin destinationPoint">
-                <i class="fas fa-map-marker-alt i"></i>
-              </li>
-            </div>
-            <div class="col-sm-5 data">1</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-7 subTitle">Date</div>
-            <div class="col-sm-5 subTitle">Time</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-7 data">2</div>
-            <div class="col-sm-5 data">3</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-7 subTitle">Price</div>
-            <div class="col-sm-5 subTitle">Seat Availability</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-7 data">&#8377;4</div>
-            <div class="col-sm-5 data">5</div>
-          </div>
+          <div class="col-sm-5 data">{{ i.destination | titlecase }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7 subTitle">Date</div>
+          <div class="col-sm-5 subTitle">Time</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7 data">{{ i.date }}</div>
+          <div class="col-sm-5 data">{{ i.validFrom +"-"+i.validTill }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7 subTitle">Price</div>
+          <div class="col-sm-5 subTitle">Seat Availability</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7 data">&#8377;{{ i.price }}</div>
+          <div class="col-sm-5 data">{{ i.seatsBooked }}</div>
         </div>
       </div>
-    </div>
-    <div class="col-sm-6 rides">
-      <div class="offeredrides">Offered rides</div>
-      <div class="scrollable">
-        <div class="box card">
-          <div class="name">
-           6
-            <span>
-              <img class="userImage" src="assets/Images/user-profile.jpg" alt="profile" />
-            </span>
-          </div>
-          <div class="row">
-            <div class="col-sm-7 subTitle">From</div>
-            <div class="col-sm-5 subTitle">To</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-4 data">7</div>
-            <div class="col-sm-3 cardPins">
-              <li class="cardPin startingPoint"></li>
-              <li class="cardPin"></li>
-              <li class="cardPin"></li>
-              <li class="cardPin"></li>
-              <li class="cardPin destinationPoint">
-                <i class="fas fa-map-marker-alt i"></i>
-              </li>
-            </div>
-            <div class="col-sm-5 data">8</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-7 subTitle">Date</div>
-            <div class="col-sm-5 subTitle">Time</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-7 data">9</div>
-            <div class="col-sm-5 data">10</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-7 subTitle">Price</div>
-            <div class="col-sm-5 subTitle">Seat Availability</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-7 data">&#8377;11</div>
-            <div class="col-sm-5 data">12</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="dropdown"></div>
     </div>
   </div>
-  
+  <div class="col-sm-6 rides">
+    <div class="offeredrides">Offered rides</div>
+    <div class="scrollable">
+      <div *ngFor="let j of offeredRide" class="box card">
+        <div class="name">
+          <!-- {{ i.firstName | titlecase }}
+          <span>
+            <img class="userImage" src="{{ i.image }}" alt="profile" />
+          </span> -->
+        </div>
+        <div class="row">
+          <div class="col-sm-7 subTitle">From</div>
+          <div class="col-sm-5 subTitle">To</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 data">{{ j.source | titlecase }}</div>
+          <div class="col-sm-3 cardPins">
+            <li class="cardPin startingPoint"></li>
+            <li class="cardPin"></li>
+            <li class="cardPin"></li>
+            <li class="cardPin"></li>
+            <li class="cardPin destinationPoint">
+              <i class="fas fa-map-marker-alt i"></i>
+            </li>
+          </div>
+          <div class="col-sm-5 data">{{ j.destination | titlecase }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7 subTitle">Date</div>
+          <div class="col-sm-5 subTitle">Time</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7 data">{{ j.date }}</div>
+          <div class="col-sm-5 data">{{ j.validFrom +"-"+j.validTill }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7 subTitle">Price</div>
+          <div class="col-sm-5 subTitle">Seats</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7 data">&#8377;{{ j.price }}</div>
+          <div class="col-sm-5 data">{{ j.seatsBooked }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="dropdown"></div>
+  </div>
+</div>

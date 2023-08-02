@@ -1,11 +1,8 @@
 export class UserDetails {
-    id!: number
-
+    userId!: number
     firstName!: string
-
     lastName!: string
-
     phoneNumber!: number
-
-    imageUrl!: string
+    email!:string
+    passwordHash!:string
 }

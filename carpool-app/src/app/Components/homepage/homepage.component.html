@@ -5,14 +5,15 @@
         </div>
         <div class="col-sm-6 profile">
             <div class="profileToggle" (click)="toggle = !toggle">
-                <span id="profileName"><b>
+                <span id="profileName"><b> {{ loginDetails?.firstName | titlecase }}
+                    {{ loginDetails?.lastName | titlecase }}
                     </b>
                 </span><span><img id="profileImage" src="assets/Images/user-profile.jpg" alt="" /></span>
             </div>
         </div>
         <div class="dropdown" *ngIf="toggle">
             <li routerLink="/home/my-profile" (click)="profileClick()">Profile</li>
-            <li routerLink="/home/my-rides">My Rides</li>
+            <li routerLink="/home/my-rides" (click)="myRides()">My Rides </li>
             <li routerLink="login" (click)="login()">Logout</li>
         </div>
 

@@ -1,10 +1,13 @@
 export class BookedRides {
-    
-    rideProviderName!: string
-    boardingStop!: string
+    ownerId!: string
+    firstName!:string
+    lastName!:string
+    customerId!:string
+    source!: string
     destination!: string
-    date!: Date
+    date!: string
+    validFrom!:string
+    validTill!:string
     price!: number
     seatsBooked!: number
-    image!: string
 }

@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginRequest } from 'src/app/Models/login-request';
+import { LoginResponse } from 'src/app/Models/login-response';
+import { LoginService } from 'src/app/Services/login.service';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -10,20 +13,52 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class SignInFormComponent {
   signInForm!: FormGroup;
   myForm!: FormGroup;
+  data!: LoginResponse
+  errorMessage!: string;
   @Output() signUpClicked: EventEmitter<any> = new EventEmitter();
   @Output() submitClicked: EventEmitter<any> = new EventEmitter();
-  constructor() {
-    this.myForm = new FormGroup({
 
+  constructor(private loginService: LoginService, private router: Router) {
+    this.myForm = new FormGroup({
       username: new FormControl(''),
       password: new FormControl('')
     });
+
+    this.signInForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(25)])
+    });
   }
+
   onSubmit() {
-    this.submitClicked.emit();
+    this.errorMessage = "";
+    if (this.signInForm.valid) {
+      const values = this.signInForm.value;
+      const signIn: LoginRequest = new LoginRequest(values.email, values.password);
+      this.loginService.loginUser(signIn).subscribe(
+        (user) => {
+          this.data = user;
+          if (this.data?.userId != null && this.data?.jwtToken != "") {
+            localStorage.setItem("userId", this.data.userId);
+            localStorage.setItem("JWT", this.data.jwtToken);
+            this.loginService.sertUserDetails(user);
+            this.router.navigate(['home']);
+            alert('Login Successfully.');
+          }
+          // else if(this.data.userId == null){
+          //   alert('User is not exist.');
+          // }
+          else {
+            this.errorMessage = 'Either your email or password isn’t right. Double-check them.';
+          }
+        })
+      }
+    // error: (err) => {
+    //   this.errorMessage = err.error;
+    // }
   }
+
   signupClicked() {
     this.signUpClicked.emit();
   }
 }
-

@@ -9,7 +9,7 @@
     </span>
     <div class="caption">we get you the matches asap !</div>
     <div class="row">
-      <form class="col-sm-11 rightcard">
+      <form [formGroup]="bookRide" class="col-sm-11 rightcard">
         <div class="inputField"><label for="from">From</label></div>
         <input type="text" formControlName="from" />
         <small class="text-danger"
@@ -19,10 +19,26 @@
         <small class="text-danger"
           *ngIf="bookRide.get('to')?.errors?.['required'] && (bookRide.get('to')?.touched)">Required</small>
         <div class="inputField"><label for="date">Date</label></div>
-        <input type="date" formControlName="date" />
+        <input type="date" formControlName="rideDate" />
         <small class="text-danger"
-          *ngIf="bookRide.get('date')?.errors?.['required'] && (bookRide.get('date')?.touched )">Required</small>
+          *ngIf="bookRide.get('rideDate')?.errors?.['required'] && (bookRide.get('rideDate')?.touched )">Required</small>
         <div class="inputField"><label for="time">Time</label></div>
+        <div class="time">
+          <input type="radio" id="time1" name="time" value="5am-9am" formControlName="time" checked />
+          <label for="time1">5am-9am</label>
+
+          <input type="radio" id="time2" name="time" value="9am-12pm" formControlName="time" />
+          <label for="time2">9am-12pm</label>
+
+          <input type="radio" id="time3" name="time" value="12pm-3pm" formControlName="time" />
+          <label for="time3">12pm-3pm</label>
+
+          <input type="radio" id="time4" name="time" value="3pm-6pm" formControlName="time" />
+          <label for="time4">3pm-6pm</label>
+
+          <input type="radio" id="time5" name="time" value="6pm-9pm" formControlName="time" />
+          <label for="time5">6pm-9pm</label>
+        </div>
         <!-- <input type="time" formControlName="time" /> -->
         <small class="text-danger"
           *ngIf="bookRide.get('time')?.errors?.['required'] && (bookRide.get('time')?.touched )">Required</small>
@@ -45,6 +61,7 @@
         <li class="startingPoint"></li>
         <li></li>
         <li></li>
+        <li></li>
         <li class="destinationPoint">
           <i class="fas fa-map-marker-alt i"></i>
         </li>
@@ -56,78 +73,73 @@
       </div>
     </div>
   </div>
-</div>
-<!-- <div class="col-sm-7">
-      <div id="matches">Your Matches</div>
-      <div class="row cards scrollable">
-        <ng-container *ngIf="data.length > 0">
-          <div
-            *ngFor="let i of data"
-            class="col-sm-6 box card"
-            id="{{ i.rideId }}"
-            (click)="bookaRide(i)"
-          >
-            <div class="name">
-              {{ i.rideProviderName | titlecase }}
-              <span>
-                <img class="userImage" src="{{ i.image }}" alt="profile" />
-              </span>
+  <div class="col-sm-7">
+    <div id="matches">Your Matches</div>
+    <div class="row cards scrollable">
+      <ng-container *ngIf="data.length > 0">
+        <div *ngFor="let i of data" class="col-sm-6 box card" (click)="bookaRide(i)">
+          <div class="name">
+            {{ i.firstName | titlecase }}
+            <!-- <span>
+              <img class="userImage" alt="profile" />
+            </span> -->
+          </div>
+          <div class="row">
+            <div class="col-sm-7 subTitle">From</div>
+            <div class="col-sm-5 subTitle">To</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 data">
+              {{ i.source | titlecase }}
             </div>
-            <div class="row">
-              <div class="col-sm-7 subTitle">From</div>
-              <div class="col-sm-5 subTitle">To</div>
+            <div class="col-sm-3 cardPins">
+              <li class="cardPin startingPoint"></li>
+              <li class="cardPin"></li>
+              <li class="cardPin"></li>
+
+              <li class="cardPin destinationPoint">
+                <i class="fas fa-map-marker-alt i"></i>
+              </li>
             </div>
-            <div class="row">
-              <div class="col-sm-4 data">
-                {{ request.BoardingPoint | titlecase }}
-              </div>
-              <div class="col-sm-3 cardPins">
-                <li class="cardPin startingPoint"></li>
-                <li class="cardPin"></li>
-                <li class="cardPin"></li>
-                <li class="cardPin"></li>
-                <li class="cardPin destinationPoint">
-                  <i class="fas fa-map-marker-alt i"></i>
-                </li>
-              </div>
-              <div class="col-sm-5 data">
-                {{ request.Destination | titlecase }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-7 subTitle">Date</div>
-              <div class="col-sm-5 subTitle">Time</div>
-            </div>
-            <div class="row">
-              <div class="col-sm-7 data">
-                {{ i.dateTime.toString().split("T")[0] }}
-              </div>
-              <div class="col-sm-5 data">
-                {{ i.dateTime.toString().split("T")[1] }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-7 subTitle">Price</div>
-              <div class="col-sm-5 subTitle">Seat Availability</div>
-            </div>
-            <div class="row">
-              <div class="col-sm-7 data">&#8377;{{ i.price }}</div>
-              <div class="col-sm-5 data">{{ i.availableSeats }}</div>
+            <div class="col-sm-5 data">
+              {{ request.destination | titlecase }}
             </div>
           </div>
-        </ng-container>
-        <ng-container *ngIf="display && data.length == 0">
-          <div class="noMatch">No Matched Rides Available</div>
-        </ng-container>
-      </div>
+          <div class="row">
+            <div class="col-sm-7 subTitle">Date</div>
+
+            <div class="col-sm-5 subTitle">Time</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7 data">
+              {{ i.date }}
+            </div>
+
+            <div class="col-sm-5 data">
+              {{ i.validFrom}} - {{i.validTill}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7 subTitle">Price</div>
+            <div class="col-sm-5 subTitle">Seat Availability</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7 data">&#8377;{{ i.price }}</div>
+            <div class="col-sm-5 data">{{ i.availableSeats }}</div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="display && data.length == 0">
+        <div class="noMatch">No Matched Rides Available</div>
+      </ng-container>
     </div>
   </div>
-  <div *ngIf="confirm" class="popup box">
-    <div class="title">Book Ride<span id="left"></span></div>
-    <div class="message">Do you want to confirm this ride!</div>
-    <div class="buttons">
-      <button (click)="book()">Yes</button>
-      <button (click)="confirm = false">No</button>
-    </div>
+</div>
+<div *ngIf="confirm" class="popup box">
+  <div class="title">Book Ride<span id="left"></span></div>
+  <div class="message">Do you want to confirm this ride!</div>
+  <div class="buttons">
+    <button (click)="book()">Yes</button>
+    <button (click)="confirm = false">No</button>
   </div>
-   -->
+</div>

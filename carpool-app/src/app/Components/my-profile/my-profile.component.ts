@@ -12,7 +12,6 @@ export class MyProfileComponent {
   uploadDetails: boolean = false;
   imageUpload!: string;
   constructor() {
-   
     this.imageUpload = this.userDetails.imageUrl;
     this.myProfile = new FormGroup({
       firstName: new FormControl(this.userDetails.firstName, [Validators.required,  Validators.pattern('[A-Za-z ]*'), Validators.maxLength(25)]),

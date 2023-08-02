@@ -21,28 +21,27 @@
 <div class="container">
   <div class="boldText">Sign Up</div>
   <hr />
-  <form [formGroup]="signupForm" >
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <div>
       <input type="text" formControlName="email" placeholder="Enter Email Id" />
     </div>
-    <!-- <small class="text-danger"
+    <small class="text-danger"
       *ngIf="signupForm.get('email')?.errors?.['required'] && (signupForm.get('email')?.touched)">Required</small>
     <small class="text-danger"
-      *ngIf="signupForm.get('email')?.errors?.['email'] && (signupForm.get('email')?.touched)">Enter valid Email</small> -->
+      *ngIf="signupForm.get('email')?.errors?.['email'] && (signupForm.get('email')?.touched)">Enter valid Email</small>
     <div>
       <input type="password" formControlName="password" placeholder="Enter Passward" />
-
     </div>
-    <!-- <small class="text-danger"
+    <small class="text-danger"
       *ngIf="signupForm.get('password')?.errors?.['required'] && (signupForm.get('password')?.touched)">Required</small>
     <small class="text-danger"
       *ngIf="(signupForm.get('password')?.errors?.['minlength'] || signupForm.get('password')?.errors?.['maxlength']) && (signupForm.get('password')?.touched)">Password
-      must be 8 to 25 characters</small> -->
+      must be 8 to 25 characters</small>
     <div>
       <input type="password" formControlName="confirmPassword" placeholder="Confirm Passward" />
     </div>
     <div>
-      <button type="submit" value="Submit" (click)="onSubmit()">
+      <button type="submit" value="Submit" >
         Submit
       </button>
     </div>

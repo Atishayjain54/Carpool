@@ -3,8 +3,7 @@ export class OfferedRides {
     customerName!: string
     boardingStop!: string
     destination!: string
-    date!: Date
+    date!: string
     price!: number
     seatsBooked!: number
-    image!: string
 }
