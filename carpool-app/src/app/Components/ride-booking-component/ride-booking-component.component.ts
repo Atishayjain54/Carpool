@@ -54,7 +54,7 @@ export class RideBookingComponentComponent {
     const values = this.bookRide.value;
     values.rideValidFrom = this.times[0];
     values.rideValidTill = this.times[1];
-    this.request = new MatchRideRequest(localStorage.getItem('userId')!, values.from, values.to, values.rideDate, this.times[0], this.times[1], values.seats);
+    this.request = new MatchRideRequest(localStorage.getItem('UserId')!, values.from, values.to, values.rideDate, this.times[0], this.times[1], values.seats);
     this.bookRideService.getMatchedRides(this.request).subscribe({
       next: (user) => { this.data = user; this.display = true; },
       error: (err) => { this.errorMessage = err.error }
@@ -69,7 +69,7 @@ export class RideBookingComponentComponent {
   }
   book() {
     debugger
-    this.bookRideRequest = new MatchRideResponse(this.bookingDetails.ownerId, localStorage.getItem('userId')!, this.bookingDetails.firstName, this.bookingDetails.lastName, this.bookingDetails.availableSeats, this.bookingDetails.source, this.bookingDetails.destination, this.bookingDetails.date, this.bookingDetails.validFrom, this.bookingDetails.validTill, this.bookingDetails.price);
+    this.bookRideRequest = new MatchRideResponse("",this.bookingDetails.ownerId, localStorage.getItem('UserId')!, this.bookingDetails.firstName, this.bookingDetails.lastName, this.bookingDetails.availableSeats, this.bookingDetails.source, this.bookingDetails.destination, this.bookingDetails.date, this.bookingDetails.validFrom, this.bookingDetails.validTill, this.bookingDetails.price);
     this.confirm = false;
     this.bookRideService.bookRide(this.bookRideRequest).subscribe({
       next: (user) => { console.log(user); alert("Successfully Booked a Ride"); this.router.navigate(['home']) },
