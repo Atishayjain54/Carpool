@@ -36,11 +36,11 @@
         </div>
         <div class="row">
           <div class="col-sm-7 subTitle">Price</div>
-          <div class="col-sm-5 subTitle">Seat Availability</div>
+          <div *ngIf="i.seatsBooked>0" class="col-sm-5 subTitle">Seat</div>
         </div>
         <div class="row">
           <div class="col-sm-7 data">&#8377;{{ i.price }}</div>
-          <div class="col-sm-5 data">{{ i.seatsBooked }}</div>
+          <div *ngIf="i.seatsBooked>0" class="col-sm-5 data">{{ i.seatsBooked }}</div>
         </div>
       </div>
     </div>
@@ -50,8 +50,8 @@
     <div class="scrollable">
       <div *ngFor="let j of offeredRide" class="box card">
         <div class="name">
-          <!-- {{ i.firstName | titlecase }}
-          <span>
+          {{ j.firstName | titlecase }}
+          <!-- <span>
             <img class="userImage" src="{{ i.image }}" alt="profile" />
           </span> -->
         </div>
@@ -82,11 +82,11 @@
         </div>
         <div class="row">
           <div class="col-sm-7 subTitle">Price</div>
-          <div class="col-sm-5 subTitle">Seats</div>
+          <div *ngIf="j.seatsBooked>0" class="col-sm-5 subTitle">Seats</div>
         </div>
         <div class="row">
           <div class="col-sm-7 data">&#8377;{{ j.price }}</div>
-          <div class="col-sm-5 data">{{ j.seatsBooked }}</div>
+          <div *ngIf="j.seatsBooked>0" class="col-sm-5 data">{{ j.seatsBooked }}</div>
         </div>
       </div>
     </div>

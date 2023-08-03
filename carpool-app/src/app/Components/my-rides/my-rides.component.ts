@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BookedRides } from 'src/app/Models/booked-rides';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { BookRideService } from 'src/app/Services/book-ride.service';
 import { OfferRideService } from 'src/app/Services/offer-ride.service';
 
@@ -14,7 +15,7 @@ bookRideService!: BookRideService;
 bookedRides!:BookedRides[];
 offeredRide!:BookedRides[];
 customerId!:string;
-  constructor(offerRideService:OfferRideService,bookRideService:BookRideService){
+  constructor(offerRideService:OfferRideService,bookRideService:BookRideService,private authService:AuthenticationService){
     this.offerRideService=offerRideService;
     this.bookRideService=bookRideService;
     this.getBookedRides();
@@ -25,7 +26,7 @@ customerId!:string;
     this.getOfferedRides();
   }
   getBookedRides() {
-    const userId = localStorage.getItem('userId');
+    const userId = this.authService.getUserId();
     if (userId) {
       this.bookRideService.getBookedRide(userId).subscribe(
         (bookedRides) => {
@@ -38,7 +39,7 @@ customerId!:string;
     } 
   }
   getOfferedRides(){
-    const userId = localStorage.getItem('userId');
+    const userId =  this.authService.getUserId();
     if (userId) {
       this.offerRideService.getOfferedRide(userId).subscribe(
         (offeredRide) => {

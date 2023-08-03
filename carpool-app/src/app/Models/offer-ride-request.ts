@@ -1,6 +1,7 @@
 import { IntermediaryStop } from "./intermediary-stop";
 
 export class OfferRideRequest {
+    rideId!:string
     ownerId!: string
     source!:string
     destination!: string

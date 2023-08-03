@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginRequest } from 'src/app/Models/login-request';
 import { LoginResponse } from 'src/app/Models/login-response';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { LoginService } from 'src/app/Services/login.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class SignInFormComponent {
   @Output() signUpClicked: EventEmitter<any> = new EventEmitter();
   @Output() submitClicked: EventEmitter<any> = new EventEmitter();
 
-  constructor(private loginService: LoginService, private router: Router) {
+  constructor(private loginService: LoginService, private router: Router,private authService:AuthenticationService) {
     this.myForm = new FormGroup({
       username: new FormControl(''),
       password: new FormControl('')
@@ -39,9 +40,10 @@ export class SignInFormComponent {
         (user) => {
           this.data = user;
           if (this.data?.userId != null && this.data?.jwtToken != "") {
-            localStorage.setItem("userId", this.data.userId);
-            localStorage.setItem("JWT", this.data.jwtToken);
-            this.loginService.sertUserDetails(user);
+            this.authService.storeUserId(this.data.userId);
+            this.authService.storeToken(this.data.jwtToken);
+            this.authService.storeUserName(this.data.firstName);
+            // this.loginService.sertUserDetails(user);
             this.router.navigate(['home']);
             alert('Login Successfully.');
           }

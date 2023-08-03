@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserDetails } from 'src/app/Models/user-details';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { UserDetailsService } from 'src/app/Services/user-details.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -8,43 +11,41 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class MyProfileComponent {
   myProfile : FormGroup;
-  userDetails: any;
+  userDetails!: UserDetails;
+  userId!:string;
   uploadDetails: boolean = false;
-  imageUpload!: string;
-  constructor() {
-    this.imageUpload = this.userDetails.imageUrl;
+  constructor(private userDetailService :UserDetailsService,private authService:AuthenticationService) {
     this.myProfile = new FormGroup({
-      firstName: new FormControl(this.userDetails.firstName, [Validators.required,  Validators.pattern('[A-Za-z ]*'), Validators.maxLength(25)]),
-      lastName: new FormControl(this.userDetails.lastName, [Validators.required]),
-      phoneNumber: new FormControl(this.userDetails.phoneNumber, [Validators.required, Validators.pattern('[0-9]{10}')])
+      firstName: new FormControl(this.userDetails?.firstName, [Validators.required,  Validators.pattern('[A-Za-z ]*'), Validators.maxLength(25)]),
+      lastName: new FormControl(this.userDetails?.lastName, [Validators.required]),
+      phoneNumber: new FormControl(this.userDetails?.phoneNumber, [Validators.required, Validators.pattern('[0-9]{10}')])
     })
-    Object.keys(this.myProfile.controls).forEach(key => {
-      this.myProfile.get(key)!.disable();
-    })
+  }
+  ngOnInIt(){
+    this.userId = this.authService.getUserId()!;
+    this.getUserDetails(this.userId);
+  }
+  getUserDetails(userId:string){
+    this.userDetailService.getUserDetails(userId).subscribe(
+      data =>{
+        this.userDetails=data;
+      }
+    )
+    this.myProfile.patchValue({
+      firstName: this.userDetails.firstName,
+      lastName: this.userDetails.lastName,
+      phoneNumber: this.userDetails.phoneNumber
+    });
   }
   editDetails() {
     this.uploadDetails = !this.uploadDetails;
-    Object.keys(this.myProfile.controls).forEach(key => {
-      this.myProfile.get(key)!.enable();
-    })
   }
   reload() {
     window.location.reload();
   }
   submit() {
-  }
-  previewFile($event: any) {
-    var file = $event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = (e) => {
-      this.imageUpload = reader.result as string;
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
+    // if(this.myProfile.valid){
+    //   this.userDetailService.updateUserDetails()
     }
   }
-  ngOnInit(): void {
-  }
-}
+

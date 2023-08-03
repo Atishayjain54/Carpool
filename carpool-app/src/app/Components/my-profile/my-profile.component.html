@@ -3,20 +3,10 @@
         <div class="myProfile">
             <h3>My Profile</h3>
         </div>
-        <!-- <div class="image" *ngIf="imageUpload == null">
-            <img src="{{ userDetails.imageUrl }}" alt="" />
-        </div>
-        <div class="image" *ngIf="imageUpload != null">
-            <img src="{{ imageUpload }}" alt="" />
-        </div> -->
-        <!-- <div class="uploadImage" *ngIf="uploadDetails">
-            <input class="imageInput" type="file" accept="image/png, image/jpg, image/jpeg"
-                (change)="previewFile($event)" />
-        </div> -->
         <div class="inputField">
             <Label>First Name</Label>
             <div>
-                <input formControlName="firstName" type="text" value="{{ userDetails.firstName.trim() }}" />
+                <input formControlName="firstName" type="text" value="firstName" />
             </div>
         </div>
         <small class="text-danger"
@@ -33,7 +23,7 @@
         <div class="inputField">
             <Label>Last Name</Label>
             <div>
-                <input formControlName="lastName" type="text" value="{{ userDetails.lastName.trim() }}" />
+                <input formControlName="lastName" type="text" value="lastName" />
             </div>
         </div>
         <small class="text-danger"
@@ -50,7 +40,7 @@
         <div class="inputField">
             <Label>Phone Number</Label>
             <div>
-                <input formControlName="phoneNumber" type="text" value="{{ userDetails.phoneNumber }}" />
+                <input formControlName="phoneNumber" type="text" value="phoneNumber" />             
             </div>
         </div>
         <small class="text-danger"
@@ -58,7 +48,7 @@
         <small class="text-danger"
             *ngIf="myProfile.get('phoneNumber')?.errors?.['pattern'] && (myProfile.get('phoneNumber')?.touched)">A 10
             digit phone number must be entered</small>
-        <div *ngIf="!uploadDetails">
+        <div >
             <button (click)="editDetails()">Edit</button>
         </div>
         <div *ngIf="uploadDetails">

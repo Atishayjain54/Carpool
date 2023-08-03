@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { IntermediaryStop } from 'src/app/Models/intermediary-stop';
 import { OfferRideRequest } from 'src/app/Models/offer-ride-request';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { CityService } from 'src/app/Services/city-.service';
 import { OfferRideService } from 'src/app/Services/offer-ride.service';
 
@@ -26,7 +27,7 @@ export class RideDetailsComponentComponent {
   stopComponent: boolean = false;
   cities?: IntermediaryStop[]
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private offerRideService: OfferRideService, private cityService: CityService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private offerRideService: OfferRideService, private cityService: CityService,private authService : AuthenticationService) {
     this.cityService.getCities().subscribe(
       data => {
         this.cities = data;
@@ -79,7 +80,8 @@ export class RideDetailsComponentComponent {
     if (this.OfferRide?.valid) {
       console.log('Form submitted successfully!');
       const offerRideRequest: OfferRideRequest = {
-        ownerId: localStorage.getItem('userId')!,
+        rideId : "",
+        ownerId: this.authService.getUserId()!,
         source: this.rideDetails.get('from')?.value,
         destination: this.rideDetails.get('to')?.value,
         date: this.rideDetails.get('date')?.value,

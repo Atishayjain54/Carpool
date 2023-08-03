@@ -3,6 +3,7 @@ import { UserDetails } from 'src/app/Models/user-details';
 import { LoginComponent } from '../login/login.component';
 import { LoginService } from 'src/app/Services/login.service';
 import { LoginResponse } from 'src/app/Models/login-response';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 
 @Component({
   selector: 'app-dash-board',
@@ -10,12 +11,11 @@ import { LoginResponse } from 'src/app/Models/login-response';
   styleUrls: ['./dash-board.component.css']
 })
 export class DashBoardComponent {
-  userDetails?:LoginResponse;
-  constructor(private loginService: LoginService) {
-
+  userName?:string;
+  constructor(private loginService: LoginService,private authService :AuthenticationService) {
+    this.getUserName();
   }
-  ngOnInIt() {
-    this.userDetails = this.loginService.getUserDetails();
-
+  getUserName(){
+    this.userName = this.authService.getUserNameByLocalStorage()!;
   }
 }

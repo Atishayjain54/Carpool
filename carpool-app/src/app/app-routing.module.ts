@@ -24,7 +24,6 @@ const routes: Routes = [
     { path: 'offer-ride', component: RideDetailsComponentComponent },
     { path: 'my-rides', component: MyRidesComponent },
     { path: 'my-profile', component: MyProfileComponent }
-    
   ]},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];

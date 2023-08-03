@@ -1,5 +1,6 @@
 export class MatchRideResponse {
     constructor(
+      public rideId:string,
       public ownerId: string,
       public customerId: string,
       public firstName: string,

@@ -13,14 +13,19 @@ import { OfferRideService } from 'src/app/Services/offer-ride.service';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent {
-  constructor(private router:Router,private loginService:LoginService,private authenticationService:AuthenticationService,bookRideService:BookRideService,offerRideService:OfferRideService){}
+  constructor(private router:Router,private loginService:LoginService,private authenticationService:AuthenticationService,bookRideService:BookRideService,offerRideService:OfferRideService){
+    this.getUserName();
+  }
   toggle : Boolean = false;
   loginDetails?: LoginResponse;
+  userName?:string
   
   ngOnInit(){
     this.loginDetails = this.loginService.getUserDetails();
   }
-
+getUserName(){
+  this.userName = this.authenticationService.getUserNameByLocalStorage()!;
+}
   myProfile() {
     this.toggle = false;
   }

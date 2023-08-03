@@ -5,7 +5,7 @@
         </div>
         <div class="col-sm-6 profile">
             <div class="profileToggle" (click)="toggle = !toggle">
-                <span id="profileName"><b> {{ loginDetails?.firstName | titlecase }}
+                <span id="profileName"><b> {{ userName | titlecase }}
                     {{ loginDetails?.lastName | titlecase }}
                     </b>
                 </span><span><img id="profileImage" src="assets/Images/user-profile.jpg" alt="" /></span>
